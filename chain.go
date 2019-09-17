@@ -21,6 +21,11 @@ func NewBlockChain() BlockChain {
 	return append(BlockChain{}, block)
 }
 
+// AddBlock adds a new block to the chain
+func (bc *BlockChain) AddBlock(data []byte) {
+	*bc = append(*bc, NewBlock((*bc)[len(*bc)-1], data))
+}
+
 // String is a formated representation of a blockchain
 func (bc BlockChain) String() string {
 	s := "["

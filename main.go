@@ -6,7 +6,7 @@ import (
 
 func main() {
 	blockchain := NewBlockChain()
-	blockchain = append(blockchain, NewBlock(blockchain[0], []byte("second block")))
+	blockchain.AddBlock([]byte("second block"))
 
 	fmt.Println(blockchain)
 }
