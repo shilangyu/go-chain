@@ -1,5 +1,5 @@
 /*
-Package main is a library for creating blockchains.
+package chain is a library for creating blockchains.
 	package main
 
 	import (
@@ -20,4 +20,4 @@ Package main is a library for creating blockchains.
 		fmt.Printf("The blockchain is correct: %t", bc.Validate())
 	}
 */
-package main
+package chain
