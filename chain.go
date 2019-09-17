@@ -56,7 +56,7 @@ func (bc BlockChain) Validate() bool {
 	}
 
 	for i, block := range bc[1:] {
-		if !bytes.Equal(block.prevHash, bc[i-1].hash) || !correctHash(*block) {
+		if !bytes.Equal(block.prevHash, bc[i].hash) || !correctHash(*block) {
 			return false
 		}
 	}
