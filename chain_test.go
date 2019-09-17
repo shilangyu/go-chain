@@ -27,7 +27,7 @@ func TestBlockChain_Validate(t *testing.T) {
 	altered := NewBlockChain()
 	altered.AddBlock([]byte("block"))
 	altered.AddBlock([]byte("block"))
-	altered[1].data = []byte("h#cked")
+	altered[1].Data = []byte("h#cked")
 
 	missing := NewBlockChain()
 	missing.AddBlock([]byte("block"))

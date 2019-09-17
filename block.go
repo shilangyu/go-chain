@@ -8,17 +8,17 @@ import (
 // Block is an element in a blockchain
 // it is recommended to initialize it from NewBlock, not manually
 type Block struct {
-	prevHash []byte
-	data     []byte
-	hash     []byte
+	PrevHash []byte
+	Data     []byte
+	Hash     []byte
 }
 
 // NewBlock initializes a block derived from
 // the previous block and given data
 func NewBlock(prevBlock *Block, data []byte) *Block {
 	block := &Block{
-		prevHash: prevBlock.hash,
-		data:     data,
+		PrevHash: prevBlock.Hash,
+		Data:     data,
 	}
 	block.GenerateHash()
 
@@ -27,6 +27,6 @@ func NewBlock(prevBlock *Block, data []byte) *Block {
 
 // GenerateHash generates a hash for a given block
 func (b *Block) GenerateHash() {
-	hash := sha256.Sum256(bytes.Join([][]byte{b.prevHash, b.data}, []byte{}))
-	b.hash = hash[:]
+	hash := sha256.Sum256(bytes.Join([][]byte{b.PrevHash, b.Data}, []byte{}))
+	b.Hash = hash[:]
 }

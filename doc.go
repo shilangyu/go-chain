@@ -15,7 +15,7 @@ package chain is a library for creating blockchains.
 
 		fmt.Printf("The blockchain is correct: %t", bc.Validate())
 
-		bc[0].data = []byte("altered")
+		bc[0].Data = []byte("altered")
 
 		fmt.Printf("The blockchain is correct: %t", bc.Validate())
 	}

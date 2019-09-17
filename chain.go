@@ -11,8 +11,8 @@ type BlockChain []*Block
 // NewBlockChain initializes a BlockChain with a genesis block
 func NewBlockChain() BlockChain {
 	block := &Block{
-		prevHash: []byte{},
-		data:     []byte("GENESIS"),
+		PrevHash: []byte{},
+		Data:     []byte("GENESIS"),
 	}
 	block.GenerateHash()
 
@@ -29,7 +29,7 @@ func (bc BlockChain) String() string {
 	s := "["
 
 	for i, block := range bc {
-		s += string(block.data)
+		s += string(block.Data)
 		if i != len(bc)-1 {
 			s += " -> "
 		}
@@ -46,9 +46,9 @@ func (bc BlockChain) String() string {
 // checks for correctness of a hash in each block
 func (bc BlockChain) Validate() bool {
 	correctHash := func(b Block) bool {
-		presumedHash := b.hash
+		presumedHash := b.Hash
 		b.GenerateHash()
-		return bytes.Equal(presumedHash, b.hash)
+		return bytes.Equal(presumedHash, b.Hash)
 	}
 
 	if len(bc) < 1 || !correctHash(*bc[0]) {
@@ -56,7 +56,7 @@ func (bc BlockChain) Validate() bool {
 	}
 
 	for i, block := range bc[1:] {
-		if !bytes.Equal(block.prevHash, bc[i].hash) || !correctHash(*block) {
+		if !bytes.Equal(block.PrevHash, bc[i].Hash) || !correctHash(*block) {
 			return false
 		}
 	}
