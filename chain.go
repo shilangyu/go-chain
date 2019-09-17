@@ -7,11 +7,11 @@ import (
 
 // BlockChain is a slice of Blocks
 // it is recommended to initialize it from NewBlockChain, not manually
-type BlockChain []Block
+type BlockChain []*Block
 
 // NewBlockChain initializes a BlockChain with a genesis block
 func NewBlockChain() BlockChain {
-	block := Block{
+	block := &Block{
 		prevHash: []byte{},
 		data:     []byte("GENESIS"),
 	}
