@@ -20,3 +20,19 @@ func NewBlockChain() BlockChain {
 
 	return append(BlockChain{}, block)
 }
+
+// String is a formated representation of a blockchain
+func (bc BlockChain) String() string {
+	s := "["
+
+	for i, block := range bc {
+		s += string(block.data)
+		if i != len(bc)-1 {
+			s += " -> "
+		}
+	}
+
+	s += "]"
+
+	return s
+}
