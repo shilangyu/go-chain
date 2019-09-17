@@ -15,8 +15,7 @@ func NewBlockChain() BlockChain {
 		prevHash: []byte{},
 		data:     []byte("GENESIS"),
 	}
-	hash := sha256.Sum256(bytes.Join([][]byte{block.data, block.prevHash}, []byte{}))
-	block.hash = hash[:]
+	block.GenerateHash()
 
 	return append(BlockChain{}, block)
 }

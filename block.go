@@ -16,11 +16,17 @@ type Block struct {
 // NewBlock initializes a block derived from
 // the previous block and given data
 func NewBlock(prevBlock *Block, data []byte) *Block {
-	hash := sha256.Sum256(bytes.Join([][]byte{prevBlock.prevHash, data}, []byte{}))
-
-	return &Block{
-		prevBlock.hash,
-		data,
-		hash[:],
+	block := &Block{
+		prevHash: prevBlock.hash,
+		data:     data,
 	}
+	block.GenerateHash()
+
+	return block
+}
+
+// GenerateHash generates a hash for a given block
+func (b *Block) GenerateHash() {
+	hash := sha256.Sum256(bytes.Join([][]byte{b.prevHash, b.data}, []byte{}))
+	b.hash = hash[:]
 }
