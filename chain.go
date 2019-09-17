@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"crypto/sha256"
 )
 
 // BlockChain is a slice of Blocks
@@ -39,4 +38,27 @@ func (bc BlockChain) String() string {
 	s += "]"
 
 	return s
+}
+
+// Validate makes sure the blockchain has no defects
+// checks if the length is at least 1
+// checks for linked hashes between blocks
+// checks for correctness of a hash in each block
+func (bc BlockChain) Validate() bool {
+	correctHash := func(b Block) bool {
+		presumedHash := b.hash
+		b.GenerateHash()
+		return bytes.Equal(presumedHash, b.hash)
+	}
+
+	if len(bc) < 1 || !correctHash(*bc[0]) {
+		return false
+	}
+
+	for i, block := range bc[1:] {
+		if !bytes.Equal(block.prevHash, bc[i-1].hash) || !correctHash(*block) {
+			return false
+		}
+	}
+	return true
 }
