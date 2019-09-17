@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Im a blockchain.")
+	blockchain := NewBlockChain()
+	blockchain = append(blockchain, NewBlock(blockchain[0], []byte("second block")))
+
+	fmt.Println(blockchain)
 }
