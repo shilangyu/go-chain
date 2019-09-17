@@ -16,3 +16,55 @@ func BenchmarkBlockChain(b *testing.B) {
 		}
 	}
 }
+
+func TestBlockChain_Validate(t *testing.T) {
+	ok := NewBlockChain()
+	ok.AddBlock([]byte("block"))
+	ok.AddBlock([]byte("block"))
+
+	empty := BlockChain{}
+
+	altered := NewBlockChain()
+	altered.AddBlock([]byte("block"))
+	altered.AddBlock([]byte("block"))
+	altered[1].data = []byte("h#cked")
+
+	missing := NewBlockChain()
+	missing.AddBlock([]byte("block"))
+	missing.AddBlock([]byte("block"))
+	missing = append(missing[:1], missing[2:]...)
+
+	tests := []struct {
+		name string
+		bc   BlockChain
+		want bool
+	}{
+		{
+			"Correct blockchain",
+			ok,
+			true,
+		},
+		{
+			"Empty blockchain",
+			empty,
+			false,
+		},
+		{
+			"Altered block",
+			altered,
+			false,
+		},
+		{
+			"Missing block",
+			missing,
+			false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.bc.Validate(); got != tt.want {
+				t.Errorf("BlockChain.Validate() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
