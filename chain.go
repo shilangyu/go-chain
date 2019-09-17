@@ -40,10 +40,10 @@ func (bc BlockChain) String() string {
 	return s
 }
 
-// Validate makes sure the blockchain has no defects
-// checks if the length is at least 1
-// checks for linked hashes between blocks
-// checks for correctness of a hash in each block
+// Validate makes sure the blockchain has no defects:
+// Is the length is at least 1?
+// Are the linked hashes between blocks correct?
+// Is the computed hash correct?
 func (bc BlockChain) Validate() bool {
 	correctHash := func(b Block) bool {
 		presumedHash := b.Hash
