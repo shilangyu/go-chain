@@ -15,10 +15,10 @@ type Block struct {
 
 // NewBlock initializes a block derived from
 // the previous block and given data
-func NewBlock(prevBlock Block, data []byte) *Block {
+func NewBlock(prevBlock Block, data []byte) Block {
 	hash := sha256.Sum256(bytes.Join([][]byte{prevBlock.prevHash, data}, []byte{}))
 
-	return &Block{
+	return Block{
 		prevBlock.hash,
 		data,
 		hash[:],
