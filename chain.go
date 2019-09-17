@@ -10,7 +10,7 @@ import (
 type BlockChain []Block
 
 // NewBlockChain initializes a BlockChain with a genesis block
-func NewBlockChain() []Block {
+func NewBlockChain() BlockChain {
 	block := Block{
 		prevHash: []byte{},
 		data:     []byte("GENESIS"),
