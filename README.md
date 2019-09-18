@@ -10,3 +10,5 @@ Created as an exercise to understand blockchains
 
 - [3b1b: bitcoin](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
 - [3b1b: 256b security](youtube.com/watch?v=S9JGmA5_unY)
+- [hashing](https://lisk.io/academy/blockchain-basics/how-does-blockchain-work/what-is-hashing)
+- many more
