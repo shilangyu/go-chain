@@ -19,8 +19,8 @@ func BenchmarkBlockChain(b *testing.B) {
 
 func TestBlockChain_Validate(t *testing.T) {
 	ok := NewBlockChain()
-	ok.AddBlock([]byte("block"), 0)
-	ok.AddBlock([]byte("block"), 0)
+	ok.AddBlock([]byte("block"), 4)
+	ok.AddBlock([]byte("block"), 3)
 
 	empty := BlockChain{}
 
@@ -33,6 +33,9 @@ func TestBlockChain_Validate(t *testing.T) {
 	missing.AddBlock([]byte("block"), 0)
 	missing.AddBlock([]byte("block"), 0)
 	missing = append(missing[:1], missing[2:]...)
+
+	noNonce := NewBlockChain()
+	noNonce = append(noNonce, NewBlock(noNonce[0], []byte("block"), 10))
 
 	tests := []struct {
 		name string
@@ -57,6 +60,11 @@ func TestBlockChain_Validate(t *testing.T) {
 		{
 			"Missing block",
 			missing,
+			false,
+		},
+		{
+			"Uncalculated nonce",
+			noNonce,
 			false,
 		},
 	}
