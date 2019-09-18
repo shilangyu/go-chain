@@ -23,7 +23,11 @@ func NewBlockChain() BlockChain {
 
 // AddBlock adds a new block to the chain
 func (bc *BlockChain) AddBlock(data []byte, difficulty uint8) {
-	*bc = append(*bc, NewBlock((*bc)[len(*bc)-1], data, difficulty))
+	block := NewBlock((*bc)[len(*bc)-1], data, difficulty)
+	block.FindNonce()
+	block.GenerateHash()
+
+	*bc = append(*bc, block)
 }
 
 // String is a formated representation of a blockchain
