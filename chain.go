@@ -49,7 +49,7 @@ func (bc BlockChain) String() string {
 // Validate makes sure the blockchain has no defects:
 // Is the length is at least 1?
 // Are the linked hashes between blocks correct?
-// Is the computed hash correct?
+// Is there a proof of work?
 func (bc BlockChain) Validate() bool {
 	correctHash := func(b Block) bool {
 		presumedHash := b.Hash
@@ -62,7 +62,7 @@ func (bc BlockChain) Validate() bool {
 	}
 
 	for i, block := range bc[1:] {
-		if !bytes.Equal(block.PrevHash, bc[i].Hash) || !correctHash(*block) {
+		if !bytes.Equal(block.PrevHash, bc[i].Hash) || !correctHash(*block) || !block.ProofOfWork() {
 			return false
 		}
 	}
