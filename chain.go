@@ -11,9 +11,11 @@ type BlockChain []*Block
 // NewBlockChain initializes a BlockChain with a genesis block
 func NewBlockChain() BlockChain {
 	block := &Block{
-		PrevHash: []byte{},
-		Data:     []byte("GENESIS"),
+		PrevHash:   []byte{},
+		Data:       []byte("GENESIS"),
+		Difficulty: 0,
 	}
+	block.FindNonce()
 	block.GenerateHash()
 
 	return append(BlockChain{}, block)
