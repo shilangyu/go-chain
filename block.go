@@ -86,6 +86,15 @@ func (b *Block) FindNonce() error {
 	return errors.New("no fitting nonce was found")
 }
 
+// ProofOfWork checks if the nonce was found.
+func (b Block) ProofOfWork() bool {
+	threshold := big.NewInt(1)
+	threshold.Lsh(threshold, 256-uint(b.Difficulty))
+	var hash big.Int
+	hash.SetBytes(b.Hash)
+	return hash.Cmp(threshold) == -1
+}
+
 // String is a formated representation of a block
 func (b Block) String() string {
 	return fmt.Sprintf(
