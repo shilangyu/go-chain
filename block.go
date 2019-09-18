@@ -32,6 +32,7 @@ func NewBlock(prevBlock *Block, data []byte, difficulty uint8) *Block {
 		Data:       data,
 		Difficulty: difficulty,
 	}
+	block.GenerateHash()
 
 	return block
 }
