@@ -14,14 +14,17 @@ type Block struct {
 	Data []byte
 	// Hash is the computed hash derived from PrevHash+Data
 	Hash []byte
+	// Difficulty describes the # of leading 0s in ProofOfWork
+	Difficulty uint8
 }
 
 // NewBlock initializes a block derived from
 // the previous block and given data.
-func NewBlock(prevBlock *Block, data []byte) *Block {
+func NewBlock(prevBlock *Block, data []byte, difficulty uint8) *Block {
 	block := &Block{
-		PrevHash: prevBlock.Hash,
-		Data:     data,
+		PrevHash:   prevBlock.Hash,
+		Data:       data,
+		Difficulty: difficulty,
 	}
 	block.GenerateHash()
 

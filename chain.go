@@ -20,8 +20,8 @@ func NewBlockChain() BlockChain {
 }
 
 // AddBlock adds a new block to the chain
-func (bc *BlockChain) AddBlock(data []byte) {
-	*bc = append(*bc, NewBlock((*bc)[len(*bc)-1], data))
+func (bc *BlockChain) AddBlock(data []byte, difficulty uint8) {
+	*bc = append(*bc, NewBlock((*bc)[len(*bc)-1], data, difficulty))
 }
 
 // String is a formated representation of a blockchain

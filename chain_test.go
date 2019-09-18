@@ -12,26 +12,26 @@ func BenchmarkBlockChain(b *testing.B) {
 		bc := NewBlockChain()
 
 		for i := 0; i < length; i++ {
-			bc.AddBlock([]byte(string(i)))
+			bc.AddBlock([]byte(string(i)), 0)
 		}
 	}
 }
 
 func TestBlockChain_Validate(t *testing.T) {
 	ok := NewBlockChain()
-	ok.AddBlock([]byte("block"))
-	ok.AddBlock([]byte("block"))
+	ok.AddBlock([]byte("block"), 0)
+	ok.AddBlock([]byte("block"), 0)
 
 	empty := BlockChain{}
 
 	altered := NewBlockChain()
-	altered.AddBlock([]byte("block"))
-	altered.AddBlock([]byte("block"))
+	altered.AddBlock([]byte("block"), 0)
+	altered.AddBlock([]byte("block"), 0)
 	altered[1].Data = []byte("h#cked")
 
 	missing := NewBlockChain()
-	missing.AddBlock([]byte("block"))
-	missing.AddBlock([]byte("block"))
+	missing.AddBlock([]byte("block"), 0)
+	missing.AddBlock([]byte("block"), 0)
 	missing = append(missing[:1], missing[2:]...)
 
 	tests := []struct {
@@ -71,7 +71,7 @@ func TestBlockChain_Validate(t *testing.T) {
 
 func TestBlockChain_String(t *testing.T) {
 	bc := NewBlockChain()
-	bc.AddBlock([]byte("block 2"))
+	bc.AddBlock([]byte("block 2"), 0)
 
 	tests := []struct {
 		name string
