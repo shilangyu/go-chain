@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"errors"
+	"fmt"
 	"math"
 	"math/big"
 )
@@ -93,6 +94,6 @@ func (b Block) String() string {
 		string(b.Data),
 		b.Nonce,
 		b.Difficulty,
-		b.PrevHash,
+		b.Hash,
 	)
 }
