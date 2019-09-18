@@ -32,14 +32,21 @@ func NewBlock(prevBlock *Block, data []byte, difficulty uint8) *Block {
 		Data:       data,
 		Difficulty: difficulty,
 	}
-	block.GenerateHash()
 
 	return block
 }
 
 // GenerateHash generates a hash for a given block.
 func (b *Block) GenerateHash() {
-	hash := sha256.Sum256(bytes.Join([][]byte{b.PrevHash, b.Data}, []byte{}))
+	buff := new(bytes.Buffer)
+	binary.Write(buff, binary.BigEndian, b.Nonce)
+
+	hash := sha256.Sum256(bytes.Join([][]byte{
+		b.PrevHash,
+		b.Data,
+		[]byte{b.Difficulty},
+		buff.Bytes(),
+	}, []byte{}))
 	b.Hash = hash[:]
 }
 
