@@ -71,7 +71,7 @@ func (b *Block) FindNonce() error {
 		buff := new(bytes.Buffer)
 		binary.Write(buff, binary.BigEndian, nonce)
 
-		hash = sha256.Sum256(bytes.Join(salt, buff.Bytes()))
+		hash = sha256.Sum256(bytes.Join(append(salt, buff.Bytes()), []byte{}))
 		hashHolder.SetBytes(hash[:])
 
 		if hashHolder.Cmp(threshold) == -1 {
