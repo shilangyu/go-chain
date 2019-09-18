@@ -84,3 +84,15 @@ func (b *Block) FindNonce() error {
 
 	return errors.New("no fitting nonce was found")
 }
+
+// String is a formated representation of a block
+func (b Block) String() string {
+	return fmt.Sprintf(
+		"{prevHash: %x, data: %s, nonce: %d, difficulty: %d, hash: %x}",
+		b.PrevHash,
+		string(b.Data),
+		b.Nonce,
+		b.Difficulty,
+		b.PrevHash,
+	)
+}
