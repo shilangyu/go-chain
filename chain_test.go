@@ -19,8 +19,8 @@ func BenchmarkBlockChain(b *testing.B) {
 
 func TestBlockChain_Validate(t *testing.T) {
 	ok := NewBlockChain()
-	ok.AddBlock([]byte("block"), 4)
-	ok.AddBlock([]byte("block"), 3)
+	ok.AddBlock([]byte("block"), 18)
+	ok.AddBlock([]byte("block"), 18)
 
 	empty := BlockChain{}
 
